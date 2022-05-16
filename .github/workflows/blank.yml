@@ -19,10 +19,10 @@ jobs:
   release_and_tag:
     runs-on: ubuntu-latest
     steps:
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=commit_sha;]$(echo ${GITHUB_SHA})"
-        id: extract_branch
+      # - name: Extract commit hash
+      #   shell: bash
+      #   run: echo "##[set-output name=commit_sha;]$(echo ${GITHUB_SHA})"
+      #   id: extract_hash
       - name: Checkout
         uses: actions/checkout@v3
       - name: Create a Release
@@ -30,4 +30,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
         with:
-          title: "release:${{ steps.extract_branch.outputs.commit_sha }}"
+          title: "release:${GITHUB_SHA}"
