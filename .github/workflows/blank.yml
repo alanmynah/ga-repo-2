@@ -5,17 +5,6 @@ on:
     branches: [dev]
 
 jobs:
-  merge-branch:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-
-      - name: Merge dev -> main
-        uses: devmasx/merge-branch@master
-        with:
-          type: now
-          target_branch: main
-          github_token: ${{ secrets.DEPLOY_TOKEN }}
   release_and_tag:
     runs-on: ubuntu-latest
     steps:
@@ -31,3 +20,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
         with:
           title: "release:${{ steps.extract_sha.outputs.commit_sha }}"
+
+      - uses: actions/checkout@v3
+
+      - name: Merge dev -> main
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: main
+          github_token: ${{ secrets.DEPLOY_TOKEN }}
