@@ -1,8 +1,7 @@
 name: CI
 
 on:
-  push:
-    branches: [dev]
+  workflow_dispatch:
 
 jobs:
   release_and_tag:
@@ -27,5 +26,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
         with:
           title: "release:${{ steps.extract_hash.outputs.commit_sha }}"
-
-      - uses: actions/checkout@v3
