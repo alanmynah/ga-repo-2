@@ -7,22 +7,22 @@ jobs:
   release_and_tag:
     runs-on: ubuntu-latest
     steps:
-      - name: Extract commit hash
+      - name: Extract branch name
         shell: bash
-        run: echo "##[set-output name=commit_sha;]$(echo ${GITHUB_SHA})"
-        id: extract_hash
-      - name: Checkout
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF} | sed 's/refs\/heads\///' | sed 's/refs\/tags\///' | sed 's/\//-/g')"
+        id: extract_branch
+      - name: Checkout branch
         uses: actions/checkout@v3
       - name: Create a Release
         uses: elgohr/Github-Release-Action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
         with:
-          title: "release:${{ steps.extract_hash.outputs.commit_sha }}"
-      - name: Merge dev -> main
+          title: "prime:${{ steps.extract_branch.outputs.branch }}"
+      - name: Merge release branch into main
         uses: devmasx/merge-branch@master
         with:
-          message: "merged in ${{ steps.extract_hash.outputs.commit_sha }} develop"
+          message: "Merged ${{ steps.extract_branch.outputs.branch }} in dev"
           type: now
           target_branch: main
           github_token: ${{ secrets.DEPLOY_TOKEN }}
