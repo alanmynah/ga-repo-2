@@ -19,13 +19,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
         with:
-          title: "release:${{ steps.extract_sha.outputs.commit_sha }}"
+          title: "release:${{ steps.extract_hash.outputs.commit_sha }}"
 
       - uses: actions/checkout@v3
 
       - name: Merge dev -> main
         uses: devmasx/merge-branch@master
         with:
+          label_name: "merged in develop"
           type: now
           target_branch: main
           github_token: ${{ secrets.DEPLOY_TOKEN }}
