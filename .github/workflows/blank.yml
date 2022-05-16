@@ -7,13 +7,6 @@ jobs:
   release_and_tag:
     runs-on: ubuntu-latest
     steps:
-      - name: Merge dev -> main
-        uses: devmasx/merge-branch@master
-        with:
-          message: "merged in develop"
-          type: now
-          target_branch: main
-          github_token: ${{ secrets.DEPLOY_TOKEN }}
       - name: Extract commit hash
         shell: bash
         run: echo "##[set-output name=commit_sha;]$(echo ${GITHUB_SHA})"
@@ -26,3 +19,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
         with:
           title: "release:${{ steps.extract_hash.outputs.commit_sha }}"
+      - name: Merge dev -> main
+        uses: devmasx/merge-branch@master
+        with:
+          message: "merged in ${{ steps.extract_hash.outputs.commit_sha }} develop"
+          type: now
+          target_branch: main
+          github_token: ${{ secrets.DEPLOY_TOKEN }}
