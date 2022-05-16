@@ -30,4 +30,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
         with:
-          title: "release:${GITHUB_SHA}"
+          title: "release:${{GITHUB_SHA}}"
