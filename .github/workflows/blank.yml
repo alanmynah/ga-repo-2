@@ -2,27 +2,27 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [dev]
 
 jobs:
-  # merge-branch:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@master
+  merge-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
 
-  #     - name: Merge staging -> uat
-  #       uses: devmasx/merge-branch@master
-  #       with:
-  #         type: now
-  #         target_branch: uat
-  #         github_token: ${{ github.token }}
+      - name: Merge dev -> main
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: main
+          github_token: ${{ secrets.DEPLOY_TOKEN }}
   release_and_tag:
     runs-on: ubuntu-latest
     steps:
-      # - name: Extract commit hash
-      #   shell: bash
-      #   run: echo "##[set-output name=commit_sha;]$(echo ${GITHUB_SHA})"
-      #   id: extract_hash
+      - name: Extract commit hash
+        shell: bash
+        run: echo "##[set-output name=commit_sha;]$(echo ${GITHUB_SHA})"
+        id: extract_hash
       - name: Checkout
         uses: actions/checkout@v3
       - name: Create a Release
@@ -30,4 +30,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
         with:
-          title: "release:${{GITHUB_SHA}}"
+          title: "release:${{ steps.extract_sha.outputs.commit_sha }}"
