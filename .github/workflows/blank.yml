@@ -16,7 +16,9 @@ jobs:
     steps:
       - name: Extract branch name
         shell: bash
-        run: echo ${{ github.ref_name }}
+        run: |
+          echo ${{ github.ref_name }}
+          echo ${{ github.head_ref }}
       #         id: extract_branch
       - name: Checkout branch
         uses: actions/checkout@v3
