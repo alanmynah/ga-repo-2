@@ -9,7 +9,7 @@ on:
 jobs:
   release_and_tag:
     runs-on: ubuntu-latest
-    # if: startsWith(github.ref, 'refs/heads/feature')
+    if: startsWith(github.head_ref, 'feature')
     environment:
       name: dev
       url: "https://alanmynah.com/"
