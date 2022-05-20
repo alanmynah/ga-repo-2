@@ -6,7 +6,7 @@ on:
 jobs:
   release_and_tag:
     runs-on: ubuntu-latest
-#     if: startsWith(github.ref_name, 'de') 
+    if: startsWith(github.ref_name, 'de') 
     environment:
       name: dev
       url: "https://alanmynah.com/"
