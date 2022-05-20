@@ -9,7 +9,7 @@ on:
 jobs:
   release_and_tag:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref_name, 'feature')
+    if: startsWith(github.ref, 'refs/heads/feature')
     environment:
       name: dev
       url: "https://alanmynah.com/"
@@ -33,3 +33,4 @@ jobs:
 #           type: now
 #           target_branch: main
 #           github_token: ${{ secrets.DEPLOY_TOKEN }}
+
