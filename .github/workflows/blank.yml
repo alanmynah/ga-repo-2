@@ -26,11 +26,3 @@ jobs:
 #           GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
 #         with:
 #           title: "prime:${{ steps.extract_branch.outputs.branch }}"
-#       - name: Merge release branch into main
-#         uses: devmasx/merge-branch@master
-#         with:
-#           message: "Merged ${{ steps.extract_branch.outputs.branch }} in dev"
-#           type: now
-#           target_branch: main
-#           github_token: ${{ secrets.DEPLOY_TOKEN }}
-
