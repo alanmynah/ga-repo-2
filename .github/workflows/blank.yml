@@ -20,9 +20,3 @@ jobs:
       #         id: extract_branch
       - name: Checkout branch
         uses: actions/checkout@v3
-#       - name: Create a Release
-#         uses: elgohr/Github-Release-Action@v4
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
-#         with:
-#           title: "prime:${{ steps.extract_branch.outputs.branch }}"
