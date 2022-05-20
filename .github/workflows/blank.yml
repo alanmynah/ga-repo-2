@@ -6,6 +6,9 @@ on:
 jobs:
   release_and_tag:
     runs-on: ubuntu-latest
+    environment:
+      name: dev
+      url: "https://alanmynah.com/"
     steps:
       - name: Extract branch name
         shell: bash
