@@ -17,6 +17,5 @@ jobs:
       - name: Extract branch name
         shell: bash
         run: echo ${{ github.ref_name }}
-      #         id: extract_branch
       - name: Checkout branch
         uses: actions/checkout@v3
