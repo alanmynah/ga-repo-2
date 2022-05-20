@@ -6,13 +6,14 @@ on:
 jobs:
   release_and_tag:
     runs-on: ubuntu-latest
+#     if: startsWith(github.ref_name, 'de') 
     environment:
       name: dev
       url: "https://alanmynah.com/"
     steps:
-#       - name: Extract branch name
-#         shell: bash
-#         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF} | sed 's/refs\/heads\///' | sed 's/refs\/tags\///' | sed 's/\//-/g')"
+      - name: Extract branch name
+        shell: bash
+        run: echo ${{ github.ref_name }}
 #         id: extract_branch
       - name: Checkout branch
         uses: actions/checkout@v3
