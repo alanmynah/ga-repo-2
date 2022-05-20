@@ -6,7 +6,7 @@ on:
 jobs:
   release_and_tag:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref_name, 'de') 
+    if: startsWith(github.ref_name, 'feature')
     environment:
       name: dev
       url: "https://alanmynah.com/"
@@ -14,7 +14,7 @@ jobs:
       - name: Extract branch name
         shell: bash
         run: echo ${{ github.ref_name }}
-#         id: extract_branch
+      #         id: extract_branch
       - name: Checkout branch
         uses: actions/checkout@v3
 #       - name: Create a Release
